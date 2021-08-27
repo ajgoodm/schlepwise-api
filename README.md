@@ -3,7 +3,13 @@ backend API to track domestic labor
 
 ## Running locally
 
-To build and run a local instance, use docker; First build the image with the API server:
+To build and run a local instance using docker, first build a local `.env` file using [dotenvi](https://www.npmjs.com/package/dotenvi) (if you don't have dotenvi installed, you'll need to run `yarn`):
+
+```
+yarn dotenvi -s local
+```
+
+Then build the image with the API server:
 
 ```bash
 docker build -t schlepwise-api_schlepwise_local:latest .

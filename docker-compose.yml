@@ -10,8 +10,8 @@ services:
     ports:
       - 4000:4000
     volumes:
-      - ./var/code
-      - ./tmp/logs:/mnt/logs
+      - /var/code
+      - /tmp/logs:/mnt/logs
     depends_on:
       - postgres
     command: 'sh /var/code/run.sh'
@@ -23,7 +23,7 @@ services:
       dockerfile: Dockerfile.postgres
     restart: always
     volumes:
-      - ./tmp/pg_data/data:/var/lib/postgresql/data
+      - /tmp/pg_data/data:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: schlepwise_local_user
       POSTGRES_PASSWORD: schlepwise_local_password
