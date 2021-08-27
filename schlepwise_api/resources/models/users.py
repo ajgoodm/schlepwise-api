@@ -10,3 +10,10 @@ user_model = ns.model(
         'name': fields.String(attribute='orm.name'),
     },
 )
+
+user_input_model = ns.model(
+    'UserInput',
+    {
+        'name': fields.String(required=True, min_length=1),
+    },
+)
