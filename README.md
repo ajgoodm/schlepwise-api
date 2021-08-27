@@ -9,7 +9,7 @@ To build and run a local instance using docker, first build a local `.env` file 
 yarn dotenvi -s local
 ```
 
-first build the image with the API server:
+Then build the image with the API server:
 
 ```bash
 docker build -t schlepwise-api_schlepwise_local:latest .
