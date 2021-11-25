@@ -1,7 +1,10 @@
 from flask import Blueprint
 from flask_restx import Api, Resource, Swagger
 
-from schlepwise_api.resources import users
+from schlepwise_api.resources import (
+    households,
+    users,
+)
 from schlepwise_api.settings import Config
 
 api_blueprint = Blueprint('api', __name__)
@@ -19,4 +22,5 @@ api = Api(api_blueprint,
 )
 
 
+api.add_namespace(households.ns)
 api.add_namespace(users.ns)

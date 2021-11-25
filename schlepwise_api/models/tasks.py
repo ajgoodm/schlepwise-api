@@ -13,7 +13,7 @@ from schlepwise_api.database import Base
 
 class Task(Base):
     """User defined list of household tasks separated
-    from scheduling or performance 
+    from scheduling or performance
     """
     __tablename__ = "tasks"
 

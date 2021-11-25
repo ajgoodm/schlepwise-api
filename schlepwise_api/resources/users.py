@@ -24,7 +24,10 @@ class Users(Resource):
     def post(self):
         request_data = request.json
 
-        user = User.create_user(name=request_data['name'])
+        user = User.create_user(
+            name=request_data['name'],
+            household_id=request_data['household_id'],
+        )
         db.session.commit()
 
         return user

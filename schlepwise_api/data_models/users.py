@@ -5,8 +5,39 @@ from attr.validators import instance_of
 import typing as T
 
 from schlepwise_api.database import db
+from schlepwise_api.models.users import Household as HouseholdORM
 from schlepwise_api.models.users import User as UserORM
 from schlepwise_api.utils import short_id
+
+
+@attr.s(frozen=True, slots=True)
+class Household:
+    orm: HouseholdORM = attr.ib(validator=instance_of(HouseholdORM))
+
+    @classmethod
+    def fetch_all(cls) -> T.List[User]:
+        households = []
+        user_orms = HouseholdORM.query.all()
+
+        for orm in user_orms:
+            households.append(
+                cls(orm=orm)
+            )
+        
+        return households
+
+    @classmethod
+    def create_household(cls, name: str, commit: bool=False) -> User:
+        household_orm = HouseholdORM(
+            id=short_id(),
+            name=name,
+        )
+
+        db.session.add(household_orm)
+        if commit:
+            db.session.commit()
+
+        return cls(orm=household_orm)
 
 
 @attr.s(frozen=True, slots=True)
@@ -30,12 +61,13 @@ class User:
         user_orm = UserORM.query.filter(UserORM.id == user_id).one_or_none()
         if user_orm is not None:
             return cls(orm=user_orm)
-    
+
     @classmethod
-    def create_user(cls, name: str, commit: bool=False) -> User:
+    def create_user(cls, name: str, household_id: str, commit: bool=False) -> User:
         user_orm = UserORM(
             id=short_id(),
             name=name,
+            household_id=household_id,
         )
 
         db.session.add(user_orm)

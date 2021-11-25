@@ -23,4 +23,4 @@ class User(Base):
 
     id = Column(String, primary_key=True)
     name = Column(String, nullable=False)
-    household_id = Column(String, ForeignKey('households.id'))
+    household_id = Column(String, ForeignKey('households.id'), nullable=False)
