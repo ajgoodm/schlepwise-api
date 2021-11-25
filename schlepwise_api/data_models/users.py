@@ -26,6 +26,12 @@ class User:
         return users
     
     @classmethod
+    def fetch_by_id(cls, user_id: str) -> T.Optional[User]:
+        user_orm = UserORM.query.filter(UserORM.id == user_id).one_or_none()
+        if user_orm is not None:
+            return cls(orm=user_orm)
+    
+    @classmethod
     def create_user(cls, name: str, commit: bool=False) -> User:
         user_orm = UserORM(
             id=short_id(),
