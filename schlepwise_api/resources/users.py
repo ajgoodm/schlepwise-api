@@ -1,11 +1,11 @@
 from flask import request
 from flask_restx import Resource, reqparse
+from werkzeug.exceptions import NotFound
 
 from schlepwise_api.database import db
 from schlepwise_api.data_models.users import User
 from schlepwise_api.resources.models.users import user_input_model, user_model
 from schlepwise_api.resources.namespaces import users_ns as ns
-from werkzeug.exceptions import NotFound
 
 
 @ns.route('/')

@@ -27,6 +27,12 @@ class Household:
         return households
 
     @classmethod
+    def fetch_by_id(cls, household_id: str) -> T.Optional[Household]:
+        household_orm = HouseholdORM.query.filter(HouseholdORM.id == household_id).one_or_none()
+        if household_orm is not None:
+            return cls(orm=household_orm)
+
+    @classmethod
     def create_household(cls, name: str, commit: bool=False) -> User:
         household_orm = HouseholdORM(
             id=short_id(),
